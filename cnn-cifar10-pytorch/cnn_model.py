@@ -1,4 +1,4 @@
-# PyTorch CNN CIFAR10 Model
+# PyTorch CNN CIFAR10 Model, translated from like TF2 Keras model
 
 import torch
 
