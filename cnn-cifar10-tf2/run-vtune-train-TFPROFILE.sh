@@ -1,11 +1,14 @@
 #! /bin/bash
 
+# This script runs VTune to collect microarchitecture data on
+# a TensorFlow model that is also recording TensorFlow profinling data
+
 RUN_DIR="${PWD}"  # Set to directory where the run should occur
-RUN_CMD='python cnn-cifar10-train.py'
+RUN_CMD='python cnn-cifar10-train-TFPROFILE.py'
 
 # Put any vtune setup commands here, like OneAPI or module loading
-# e.g. source /opt/intel/oneapi/setvars.sh
-module load oneapi
+# e.g. module load oneapi
+source "${HOME}/intel/oneapi/setvars.sh"
 echo -n '===== VTune Being Used =====: ' ; which vtune ; vtune --version
 
 # Load conda and activate environment
