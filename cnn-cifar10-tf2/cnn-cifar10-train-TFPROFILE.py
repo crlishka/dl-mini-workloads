@@ -45,3 +45,5 @@ history = model.fit(train_images, train_labels, epochs=3,
 tf.profiler.experimental.stop()
 
 test_loss, test_acc = model.evaluate(test_images,  test_labels, verbose=2)
+
+model.save('./saved-model')
