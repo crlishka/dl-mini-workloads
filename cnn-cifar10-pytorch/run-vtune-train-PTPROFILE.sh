@@ -1,7 +1,7 @@
 #! /bin/bash
 
 RUN_DIR="${PWD}"  # Set to directory where the run should occur
-RUN_CMD='python cnn-cifar10-train.py'
+RUN_CMD='python cnn-cifar10-train-PTPROFILE.py'
 
 # Put any vtune setup commands here, like OneAPI or module loading
 # e.g. source /opt/intel/oneapi/setvars.sh
