@@ -29,7 +29,8 @@ echo "Results can be found in ${PWD}"
 # Example of collection with custom collector:
 #    COLLECT_CMD="${HOME}/bin/vtune-custom-tf1-collector.sh ./tf-profile-train"
 #    vtune -collect uarch-exploration -custom-collector="${COLLECT_CMD}" $VTUNE_OPTS -app-working-dir "${RUN_DIR}" -- ${RUN_CMD}
-
+# See the following article for information on creating a custom collector for TensorFlow:
+#    https://software.intel.com/content/www/us/en/develop/articles/profiling-tensorflow-workloads-with-intel-vtune-amplifier.html
 
 # Other collection types:
 #   vtune -collect performance-snapshot
