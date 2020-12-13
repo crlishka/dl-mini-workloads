@@ -35,28 +35,29 @@ class CnnModel(torch.nn.Module):
 
         super(CnnModel, self).__init__()
 
-        # Reused layers
-        self.relu = torch.nn.ReLU()
-        self.pool = torch.nn.MaxPool2d(2)
-
-        # Unique Layers
         self.conv_0 = torch.nn.Conv2d(3, 32, 3)
+        self.relu_0 = torch.nn.ReLU()
+        self.pool_0 = torch.nn.MaxPool2d(2)
         self.conv_1 = torch.nn.Conv2d(32, 64, 3)
+        self.relu_1 = torch.nn.ReLU()
+        self.pool_1 = torch.nn.MaxPool2d(2)
         self.conv_2 = torch.nn.Conv2d(64, 64, 3)
+        self.relu_2 = torch.nn.ReLU()
         self.dens_0 = torch.nn.Linear(64 * 4 * 4, 64)
+        self.relu_3 = torch.nn.ReLU()
         self.dens_1 = torch.nn.Linear(64, 10)
 
     def forward(self, x):
 
-        # Keras equivalent:            # input_shape=(32, 32, 3)
-        x = self.relu(self.conv_0(x))  # add(Conv2D(32, (3,3), act='relu', ...)
-        x = self.pool(x)               # add(MaxPooling2D((2, 2))
-        x = self.relu(self.conv_1(x))  # add(Conv2D(64, (3,3), act='relu', ...)
-        x = self.pool(x)               # add(MaxPooling2D((2, 2))
-        x = self.relu(self.conv_2(x))  # add(Conv2D(64, (3,3), act='relu', ...)
-        x = x.view(-1, 64 * 4 * 4)     # add(Flatten())
-        x = self.relu(self.dens_0(x))  # add(Dense(64, acti='relu'))
-        x = self.dens_1(x)             # add(Dense(10))
+        #                Keras equivalent: input_shape=(32, 32, 3)
+        x = self.relu_0(self.conv_0(x))  # add(Conv2D(32, (3,3), act='relu', ...)
+        x = self.pool_0(x)               # add(MaxPooling2D((2, 2))
+        x = self.relu_1(self.conv_1(x))  # add(Conv2D(64, (3,3), act='relu', ...)
+        x = self.pool_1(x)               # add(MaxPooling2D((2, 2))
+        x = self.relu_2(self.conv_2(x))  # add(Conv2D(64, (3,3), act='relu', ...)
+        x = x.view(-1, 64 * 4 * 4)       # add(Flatten())
+        x = self.relu_3(self.dens_0(x))  # add(Dense(64, acti='relu'))
+        x = self.dens_1(x)               # add(Dense(10))
         return x
 
     def save_filename(self):  return './saved-model.zip'
