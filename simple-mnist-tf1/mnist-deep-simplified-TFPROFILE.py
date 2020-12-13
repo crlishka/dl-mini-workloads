@@ -41,6 +41,8 @@ import time
 
 from tensorflow.examples.tutorials.mnist import input_data
 
+from tensorflow.python.client import timeline
+
 import tensorflow as tf
 # CRL-ORIG: import ngraph_bridge
 
@@ -187,7 +189,12 @@ def train_mnist_cnn(FLAGS):
     tf.summary.scalar('Training accuracy', accuracy)
     tf.summary.scalar('Loss function', cross_entropy)
 
+    graph_location = "./tf-profile-train"
+    print('Saving graph to: %s' % graph_location)
+
     merged = tf.summary.merge_all()
+    train_writer = tf.summary.FileWriter(graph_location)
+    train_writer.add_graph(tf.get_default_graph())
 
     saver = tf.train.Saver()
 
@@ -209,15 +216,27 @@ def train_mnist_cnn(FLAGS):
                 print('step %d, training accuracy %g, %g sec to evaluate' %
                       (i, train_accuracy, time.time() - t))
             t = time.time()
+
+            run_options = tf.RunOptions(trace_level=tf.RunOptions.FULL_TRACE)
+            run_metadata = tf.RunMetadata()
             _, summary, loss = sess.run([train_step, merged, cross_entropy],
                                         feed_dict={
                                             x: batch[0],
                                             y_: batch[1],
                                             keep_prob: 0.5
-                                        })
+                                        }, options=run_options, run_metadata=run_metadata)
+            train_writer.add_run_metadata(run_metadata, 'cnn_' + "step_{}".format(i), i)
+
+            if (i >= 100) and (i < 105) :  # Only write timelines for steps 100 through 104
+                fetched_timeline = timeline.Timeline(run_metadata.step_stats)
+                chrome_trace = fetched_timeline.generate_chrome_trace_format()
+                with open(graph_location + '/timeline_{}.json'.format(i), 'w') as f:
+                    f.write(chrome_trace)
+
             loss_values.append(loss)
             print('step %d, loss %g, %g sec for training step' %
                   (i, loss, time.time() - t))
+            train_writer.add_summary(summary, i)
 
         print("Training finished. Running test")
 

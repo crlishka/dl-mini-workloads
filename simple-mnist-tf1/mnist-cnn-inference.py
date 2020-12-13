@@ -1,3 +1,8 @@
+# Derived from https://github.com/tensorflow/ngraph-bridge branch r0.18,
+# directory ngraph-bridge/examples/mnist
+#
+# Original information from that file:
+#
 # Copyright 2015 The TensorFlow Authors. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -183,7 +188,7 @@ def train_mnist_cnn(FLAGS):
                                               })
             test_accuracy_final = test_accuracy_final + test_accuracy
             reference_accucary = 0.9612
-            print('step %d, test_accuracy %g, %g sec for infernce step' %
+            print('step %d, test_accuracy %g, %g sec for inference step' %
                   (i, test_accuracy, time.time() - t))
             train_writer.add_summary(summary, i)
         test_accuracy_final = test_accuracy_final / num_eval_cycles
@@ -221,7 +226,7 @@ if __name__ == '__main__':
     parser.add_argument(
         '--model_dir',
         type=str,
-        default='./mnist_trained/',
+        default='./saved-model/',
         help='enter model dir')
 
     FLAGS, unparsed = parser.parse_known_args()
