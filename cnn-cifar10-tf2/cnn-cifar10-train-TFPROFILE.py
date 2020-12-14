@@ -31,8 +31,18 @@ model.compile(optimizer='adam',
               loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
               metrics=['accuracy'])
 
-history = model.fit(train_images, train_labels, epochs=10, 
-                    validation_data=(test_images, test_labels))
+# TensorBoard tracing and profiling
+# Profiling requires: "pip install -U tensorboard_plugin_profile"
+log_dir = "tf-profile-train"
+tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=log_dir, histogram_freq=1,
+                                                      profile_batch=0,
+                                                      embeddings_freq=10, write_graph=True)
+
+tf.profiler.experimental.start('tf-profile-train')
+history = model.fit(train_images, train_labels, epochs=3, 
+                    validation_data=(test_images, test_labels),
+                    callbacks=[tensorboard_callback])
+tf.profiler.experimental.stop()
 
 test_loss, test_acc = model.evaluate(test_images,  test_labels, verbose=2)
 
