@@ -42,6 +42,10 @@ script for details.
 
 ## Notes
 
+All scripts were tested with Python 3.7 and TensorFlow 1.14, TensorFlow 2.2 or
+PyTorch 1.7 (where appropfiate).  Python, TensorFlow, and PyTorch were
+installed using conda.
+
 For all models, a training script (without any TensorBoard profiling) is
 provided which trains the model over a short period, then saves the model out.
 The matching inference script uses the saved model, so the training script
