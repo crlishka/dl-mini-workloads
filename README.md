@@ -12,7 +12,7 @@ otherwise.
 ## Models Provided
 
 
-* cnn-cifar10-tf2
+### cnn-cifar10-tf2
 
 A CNN model that runs over the CIFAR10 dataset, implemented in TensorFlow 2
 Keras.  This model was derived from a standard TensorFlow 2.x example -- see
@@ -21,19 +21,19 @@ the model script for details.
 A Horovod version is provided for experiments with simple distributed runs.
 
 
-* cnn-cifar10-pytorch
+### cnn-cifar10-pytorch
 
 A CNN model that runs over the CIFAR10 dataset, implemented in PyTorch.  This
 model was translated from the cnn-cifar10-tf2 model
 
 
-* simple-mnist-tf1
+### simple-mnist-tf1
 
 A simple NN which runs over the MNIST dataset, implemented in TF 1.1x.  This
 model was derived from a CI test in the open-source TensorFlow nGraph project.
 
 
-* simple-mnist-tf2
+### simple-mnist-tf2
 
 A simple NN which runs over the MNIST dataset, implemented in TF 2.x.  This
 model was derived from a standard TensorFlow 2.x example -- see the model
