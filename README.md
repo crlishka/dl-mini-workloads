@@ -43,7 +43,7 @@ script for details.
 ## Notes
 
 All scripts were tested with Python 3.7 and TensorFlow 1.14, TensorFlow 2.2 or
-PyTorch 1.7 (where appropfiate).  Python, TensorFlow, and PyTorch were
+PyTorch 1.7 (where appropriate).  Python, TensorFlow, and PyTorch were
 installed using conda.
 
 For all models, a training script (without any TensorBoard profiling) is
@@ -65,6 +65,6 @@ VTune's timeline display:
 
 https://software.intel.com/content/www/us/en/develop/articles/profiling-tensorflow-workloads-with-intel-vtune-amplifier.html
 
-Note that Horovod's timeline capabilities also generate a chrome::/tracking
+Note that Horovod's timeline capabilities also generate a chrome::/tracing
 compatible JSON file, and can be incorporated into VTune's timeline in a
 similar fashion.
